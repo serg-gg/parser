@@ -28,9 +28,10 @@ def get_vacancies_links(vacancies_soup):
         v = str(v).split('\n')
         for st in v:
             if st.startswith('<a') and 'href=' in st:
+                title = st[(st.index('listing">')+10):(st.index('</h3')-1)]
                 start_index = st.index('href') + 6
                 end_index = st[start_index:].index('"') + start_index
                 link = 'https://nofluffjobs.com' + st[start_index:end_index]
-                vacancies.append(link)
+                vacancies.append((title, link))
     return vacancies
 
